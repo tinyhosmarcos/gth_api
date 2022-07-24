@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operation_type: false
+  property_type: 1
+  price: 1
+  maintenance: 1
+  bedrooms_count: 1
+  bathrooms_count: 1
+  area: 1
+  pets_allowed: false
+  description: MyText
+  active_published: false
+  user: one
+
+two:
+  operation_type: false
+  property_type: 1
+  price: 1
+  maintenance: 1
+  bedrooms_count: 1
+  bathrooms_count: 1
+  area: 1
+  pets_allowed: false
+  description: MyText
+  active_published: false
+  user: two
