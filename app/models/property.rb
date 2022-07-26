@@ -29,10 +29,18 @@ class Property < ApplicationRecord
     }
   end 
 
+  def direction
+    {
+      address: address,
+      latitude: latitude,
+      longitude: longitude
+    }
+  end
+
   def set_location
     results = Geocoder.search(address)
     print results
-    return if results.nil?
+    return if results.first.nil?
     
     self.latitude = results.first.coordinates[0]
     self.longitude = results.first.coordinates[1]
