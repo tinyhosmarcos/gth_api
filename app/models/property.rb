@@ -6,18 +6,19 @@ class Property < ApplicationRecord
   has_many :status, dependent: :destroy
   has_many_attached :images, dependent: :destroy
   # validations
-
-  enum operation_type: { rent: 0, sale: 1 }
-  enum property_type: { apartment: 0, house: 1 }
-  validates price: { presence: true, numericality: { greater_than: 0 } }
-  validates maintenance: { presence: true, numericality: { greater_than: 0 } }
-  validates bedrooms_count: { presence: true, numericality: { greater_than: 0 } }
-  validates bathrooms_count: { presence: true, numericality: { greater_than: 0 } }
-  validates area: { presence: true, numericality: { greater_than: 0 } }
-  validates pets_allowed: { presence: true }
-  validates description: { presence: true }
-  validates address: { presence: true }
-  validates user: { presence: true }
+  
+    enum operation_type: { rent: 0, sale: 1 }
+    enum property_type: { apartment: 0, house: 1 }
+  
+  validates :price, presence: true, numericality: { greater_than: 0 }
+  validates :maintenance, presence: true, numericality: { greater_than: 0 }
+  validates :bedrooms_count, presence: true, numericality: { greater_than: 0 }
+  validates :bathrooms_count, presence: true, numericality: { greater_than: 0 }
+  validates :area, presence: true, numericality: { greater_than: 0 }
+  validates :pets_allowed, presence: true
+  validates :description, presence: true
+  validates :address, presence: true
+  validates :user, presence: true
   
   def owner
     {
@@ -37,7 +38,7 @@ class Property < ApplicationRecord
   end
 
   def images
-    image.map{ |image| Rails.application.routes.url_helpers.url_for(image) } if image.attached?
+    images.map{ |image| Rails.application.routes.url_helpers.url_for(image) } if images.attached?
   end
 
 end
