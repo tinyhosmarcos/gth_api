@@ -10,10 +10,10 @@ class Property < ApplicationRecord
     enum operation_type: { rent: 0, sale: 1 }
     enum property_type: { apartment: 0, house: 1 }
   
-  validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :maintenance, presence: true, numericality: { greater_than: 0 }
-  validates :bedrooms_count, presence: true, numericality: { greater_than: 0 }
-  validates :bathrooms_count, presence: true, numericality: { greater_than: 0 }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :maintenance, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :bedrooms_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :bathrooms_count, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :area, presence: true, numericality: { greater_than: 0 }
   validates :pets_allowed, presence: true
   validates :description, presence: true
@@ -31,13 +31,14 @@ class Property < ApplicationRecord
 
   def set_location
     results = Geocoder.search(address)
-    return if results.present?
+    print results
+    return if results.nil?
     
     self.latitude = results.first.coordinates[0]
     self.longitude = results.first.coordinates[1]
   end
 
-  def images
+  def images_url
     images.map{ |image| Rails.application.routes.url_helpers.url_for(image) } if images.attached?
   end
 
