@@ -7,29 +7,30 @@ class PropertiesController < ApplicationController
   def index
     properties = Property.where.not( user: current_user )
 
-    render json: properties, serializer: PropertySerializer, root: 'properties', status: :ok
+    render json: PropertySerializer.new(properties).serializable_hash[:data].map{|property| property[:attributes]}, status: :ok
+    # render json: properties, serializer: PropertySerializer, status: :ok, except: [:created_at, :updated_at], methods: [:owner, :images_url]
   end
 
   # GET /properties/1
   def show
-    render json: @property, serializer: PropertySerializer, root: 'property', status: :ok
+    render json: PropertySerializer.new(@property).serializable_hash[:data][:attributes], status: :ok
   end
 
   # POST /properties
   def create
-    property = Property.new(property_params)
+    @property = Property.new(property_params)
 
     if @property.save
-      render json: property, serializer: PropertySerializer, root: 'property', status: :created
+      render json: PropertySerializer.new(@property).serializable_hash[:data][:attributes], status: :created
     else
-      render json: property.errors, status: :unprocessable_entity
+      render json: @property.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /properties/1
   def update
     if @property.update(property_params)
-      render json: @property, serializer: PropertySerializer, root: 'property', status: :ok
+      render json: PropertySerializer.new(@property).serializable_hash[:data][:attributes], status: :ok 
     else
       render json: @property.errors, status: :unprocessable_entity
     end
@@ -48,7 +49,7 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:operation_type, :property_type, :price, :maintenance,
+      params.require(:property).permit(:operation_type, :property_type, :price, :maintenance, :address,
                                       :bedrooms_count, :bathrooms_count, :area, :pets_allowed,
                                       :description, :active_published, :user_id)
     end
