@@ -1,51 +1,48 @@
 class StatusesController < ApplicationController
-  before_action :set_status, only: %i[ show update destroy ]
+  # before action to set_statuses_with_current_user for index_contacts and index_favorites
+  before_action :set_statuses_with_current_user, only: [:index_contacts, :index_favorites, :create]
 
   # GET /statuses
-  def index
-    @statuses = Status.all
-
-    render json: @statuses
+  def index_contacts
+    render json: @statuses.where(status_type: "contact")
   end
 
-  # GET /statuses/1
-  def show
-    render json: @status
+  
+  def index_favorites
+    render json: @statuses.where(status_type: "favorite")
   end
 
   # POST /statuses
   def create
-    @status = Status.new(status_params)
+    status = @statuses.new(status_params)
 
-    if @status.save
-      render json: @status, status: :created, location: @status
+    if status.save
+      render json: status, status: :created, location: status
     else
-      render json: @status.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /statuses/1
-  def update
-    if @status.update(status_params)
-      render json: @status
-    else
-      render json: @status.errors, status: :unprocessable_entity
+      render json: status.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /statuses/1
   def destroy
-    @status.destroy
+    # Need refactor
+    status = Status.where(id:params[:id])
+    if !status.empty? and status[0].user_id == current_user.id
+      status[0].destroy
+      render json: status, status: :ok
+    else
+      render json: { error: "Unauthorized Access" }, status: :not_found
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_status
-      @status = Status.find(params[:id])
+    def set_statuses_with_current_user
+      @statuses = Status.where(user_id:current_user.id)
     end
 
     # Only allow a list of trusted parameters through.
     def status_params
-      params.require(:status).permit(:user_id, :property_id, :status_type)
+      params.require(:status).permit(:id, :property_id, :status_type)
     end
 end
