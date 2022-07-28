@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   # Properties routes
   resources :properties, only: [:index, :show, :create, :update, :destroy]
-
+  get "/filter" => "properties#filter"
   # Status routes
   resources :statuses, only: [:destroy]
   get "/statuses/contacts" => "statuses#index_contacts"
