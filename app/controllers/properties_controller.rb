@@ -41,6 +41,20 @@ class PropertiesController < ApplicationController
     @property.destroy
   end
 
+  # GET /properties/filter
+  def filter
+    properties = Property.where.not( user: current_user )
+    properties = properties.where(operation_type: params[:operation_type]) if params[:operation_type].class == Integer
+    properties = properties.where("price >= :min AND price <= :max", min: params[:price][0], max: params[:price][1]) if params[:price]
+    properties = properties.where(property_type: params[:property_type]) if params[:property_type].class == Integer
+    properties = properties.where("bathrooms_count >= :min", min: params[:bathrooms_count]) if params[:bathrooms_count].class == Integer
+    properties = properties.where("bedrooms_count >= :min", min: params[:bedrooms_count]) if params[:bedrooms_count].class == Integer
+    properties = properties.where("area >= :min AND area <= :max", min: params[:area][0], max: params[:area][1]) if params[:area]
+    properties = properties.where(pets_allowed: params[:pets_allowed]) if params[:pets_allowed].class != NilClass
+
+    render json: PropertySerializer.new(properties).serializable_hash[:data].map{|property| property[:attributes]}, status: :ok
+  end 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property

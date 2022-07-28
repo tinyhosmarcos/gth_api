@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   skip_before_action :authorize
 
   def create
-    user = user.find_by(email: params[:email])
+    user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
       user.regenerate_token
       render json: user, status: :created, except: [:password_digest, :created_at, :updated_at]
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user.invlidate_token
+    current_user.invalidate_token
     head :ok
   end
 end

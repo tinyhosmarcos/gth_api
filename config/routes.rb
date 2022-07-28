@@ -11,9 +11,13 @@ Rails.application.routes.draw do
   
   # Properties routes
   resources :properties, only: [:index, :show, :create, :update, :destroy]
-
+  get "/filter" => "properties#filter"
   # Status routes
-  resources :statuses
+  resources :statuses, only: [:destroy]
+  get "/statuses/contacts" => "statuses#index_contacts"
+  get "/statuses/favorites" => "statuses#index_favorites"
+  post "/statuses" => "statuses#create"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
