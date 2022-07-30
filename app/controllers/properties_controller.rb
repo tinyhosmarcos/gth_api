@@ -7,7 +7,7 @@ class PropertiesController < ApplicationController
   def index
     properties = Property.where.not( user: current_user )
 
-    render json: PropertySerializer.new(properties).serializable_hash[:data].map{|property| property[:attributes]}, status: :ok
+    paginate json: PropertySerializer.new(properties).serializable_hash[:data].map{|property| property[:attributes]}, per_page: 9, status: :ok
     # render json: properties, serializer: PropertySerializer, status: :ok, except: [:created_at, :updated_at], methods: [:owner, :images_url]
   end
 
@@ -52,7 +52,9 @@ class PropertiesController < ApplicationController
     properties = properties.where("area >= :min AND area <= :max", min: params[:area][0], max: params[:area][1]) if params[:area]
     properties = properties.where(pets_allowed: params[:pets_allowed]) if params[:pets_allowed].class != NilClass
 
-    render json: PropertySerializer.new(properties).serializable_hash[:data].map{|property| property[:attributes]}, status: :ok
+    paginate json: PropertySerializer.new(properties).serializable_hash[:data].map{|property| property[:attributes]}, per_page:9, status: :ok
+    # render json: PropertySerializer.new(properties).serializable_hash[:data].map{|property| property[:attributes]}, status: :ok
+  
   end 
   
   private

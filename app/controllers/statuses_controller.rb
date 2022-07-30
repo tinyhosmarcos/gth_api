@@ -5,14 +5,18 @@ class StatusesController < ApplicationController
   # GET /statuses
   def index_contacts
     @statuses = @statuses.where(status_type: "contact")
-    render json: StatusSerializer.new(@statuses).serializable_hash[:data].map{|status| status[:attributes]}, status: :ok
+    paginate json: StatusSerializer.new(@statuses).serializable_hash[:data].map{|status| status[:attributes]}, per_page:9, status: :ok
+    
+    # render json: StatusSerializer.new(@statuses).serializable_hash[:data].map{|status| status[:attributes]}, status: :ok
 
   end
 
   
   def index_favorites
     @statuses = @statuses.where(status_type: "favorite")
-    render json: StatusSerializer.new(@statuses).serializable_hash[:data].map{|status| status[:attributes]}, status: :ok
+    paginate json: StatusSerializer.new(@statuses).serializable_hash[:data].map{|status| status[:attributes]}, per_page:9, status: :ok
+    
+    # render json: StatusSerializer.new(@statuses).serializable_hash[:data].map{|status| status[:attributes]}, status: :ok
   end
 
   # POST /statuses
