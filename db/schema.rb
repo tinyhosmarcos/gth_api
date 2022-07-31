@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_24_050245) do
     t.string "name"
     t.string "email", null: false
     t.integer "phone"
-    t.string "profile_type", default: "0"
+    t.integer "profile_type", default: 0
     t.string "password_digest"
     t.string "token"
     t.datetime "created_at", null: false

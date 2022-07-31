@@ -102,7 +102,7 @@ casa6.images.attach(io: File.open("db/images/Rectangle 17house (6).png"), filena
 property_verify(casa6)
 
 casa7 = Property.create(operation_type: 'rent', address: 'Av. Juan Pablo II 583, Lima, Peru',
-    price: '12314', property_type: 'department',
+    price: '12314', property_type: 'apartment',
     bedrooms_count: '41', bathrooms_count: '25', area: '180',
     description: 'FFFFFFFFFFFFFasdsadasdasden y servicios completos agua, luz, telefono y gas',
     active_published: true, pets_allowed: true, user_id: 3)
@@ -110,7 +110,7 @@ casa7.images.attach(io: File.open("db/images/Rectangle 17house (7).png"), filena
 property_verify(casa7)
 
 department8 = Property.create(operation_type: 'rent', address: 'Av. Juan Pablo II 583, Lima, Peru',
-    price: '1243314', property_type: 'department',
+    price: '1243314', property_type: 'apartment',
     bedrooms_count: '4131', bathrooms_count: '254', area: '180',
     description: 'ua, luz, telefono y gas',
     active_published: true, pets_allowed: true, user_id: 3)
@@ -118,7 +118,7 @@ department8.images.attach(io: File.open("db/images/Rectangle 17house (8).png"), 
 property_verify(department8)
 
 department9 = Property.create(operation_type: 'rent', address: 'Av. Juan Pablo II 583, Lima, Peru',
-    price: '12', property_type: 'department',
+    price: '12', property_type: 'apartment',
     bedrooms_count: '14', bathrooms_count: '254', area: '180',
     description: 'SSSSSSSSSSSSSSSServicios completos agua, luz, telefono y gas',
     active_published: true, pets_allowed: true, user_id: 3)
@@ -127,7 +127,7 @@ property_verify(department9)
 
 
 department10 = Property.create(operation_type: 'rent', address: 'Av. Juan Pablo II 583, Lima, Peru',
-    price: '12', property_type: 'department',
+    price: '12', property_type: 'apartment',
     bedrooms_count: '14', bathrooms_count: '254', area: '180',
     description: 'CCCCCCCCCCCCCCCCCCCCCCCCCCCAAAAAAA completos agua, luz, telefono y gas',
     active_published: true, pets_allowed: true, user_id: 3)
@@ -135,7 +135,7 @@ department10.images.attach(io: File.open("db/images/Rectangle 17house (10).png")
 property_verify(department10)
 
 department11 = Property.create(operation_type: 'rent', address: 'Av. Juan Pablo II 583, Lima, Peru',
-    price: '12', property_type: 'department',
+    price: '12', property_type: 'apartment',
     bedrooms_count: '14', bathrooms_count: '254', area: '180',
     description: '%%%%%%%%%%%%% completos agua, luz, telefono y gas',
     active_published: true, pets_allowed: true, user_id: 3)
@@ -143,7 +143,7 @@ department11.images.attach(io: File.open("db/images/Rectangle 17house (11).png")
 property_verify(department11)
 
 department12 = Property.create(operation_type: 'rent', address: 'Av. Juan Pablo II 583, Lima, Peru',
-  price: '1244', property_type: 'department',
+  price: '1244', property_type: 'apartment',
   bedrooms_count: '14', bathrooms_count: '254', area: '180',
   description: ' )))))))))))))) completos agua, luz, telefono y gas',
   active_published: true, pets_allowed: true, user_id: 3)
@@ -154,7 +154,7 @@ department12.images.attach(io: File.open("db/images/Rectangle 17house (11).png")
 property_verify(department12)
 
 department13 = Property.create(operation_type: 'rent', address: 'Av. Juan Pablo II 583, Lima, Peru',
-    price: '1244', property_type: 'department',
+    price: '1244', property_type: 'apartment',
     bedrooms_count: '14', bathrooms_count: '254', area: '180',
     description: ' ))))))))))) completos agua, luz, telefono y gas',
     active_published: true, pets_allowed: true, user_id: 3)
