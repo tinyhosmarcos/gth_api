@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # Skip for developmet, actived for deployment
   skip_before_action :authorize, only: :create
-  
+  wrap_parameters format: [:json]  
   # POST /users
   def create
     user = User.new(user_params)
@@ -25,6 +25,6 @@ class UsersController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :phone, :profile_type, elements:{:password, :password_confirmation})
+      params.permit(:name, :email, :phone, :profile_type, :password, :password_confirmation)
     end 
 end
